@@ -9,7 +9,6 @@ import AdminImage from '../../img/admin.jpg'
 import ProfessorImage from '../../img/professor.jpg'
 import StudentImage from '../../img/student.jpg'
 import ReactCardFlip from "react-card-flip";
-import {Link} from "react-router-dom";
 
 const styles = {
     adminCardAction: {
@@ -28,7 +27,7 @@ const styles = {
         minHeight: 165,
     },
     cardMedia: {
-        minHeight: 165,
+        minHeight: 185,
     },
 }
 
@@ -71,7 +70,7 @@ class Registration extends React.Component {
 
             return (
                 <Grid>
-                    <Typography align={"center"}>
+                    <Typography align={"center"} >
                         Choose your champion
                     </Typography>
 
@@ -96,7 +95,7 @@ class Registration extends React.Component {
                                         <TextField required label="Login"/>
                                         <TextField required label="Password" type={"password"}/>
                                         <TextField required label="Repeat password" type={"password"}/>
-                                        <Button>Register</Button>
+                                        <Button variant={"outlined"}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
@@ -129,7 +128,7 @@ class Registration extends React.Component {
                                         <TextField required label="Login"/>
                                         <TextField required label="Password" type={"password"}/>
                                         <TextField required label="Repeat password" type={"password"}/>
-                                        <Button>Register</Button>
+                                        <Button variant={"outlined"}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
@@ -162,7 +161,7 @@ class Registration extends React.Component {
                                         <TextField required label="Login"/>
                                         <TextField required label="Password" type={"password"}/>
                                         <TextField required label="Repeat password" type={"password"}/>
-                                        <Button>Register</Button>
+                                        <Button variant={"outlined"}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
