@@ -4,11 +4,11 @@ import {
     Card, CardActions, CardMedia,
     Typography, TextField
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import AdminImage from '../../img/admin.jpg'
 import ProfessorImage from '../../img/professor.jpg'
 import StudentImage from '../../img/student.jpg'
 import ReactCardFlip from "react-card-flip";
+import {API} from "../../api/API";
 
 const styles = {
     adminCardAction: {
@@ -31,26 +31,27 @@ const styles = {
     },
 }
 
-const useStyles = makeStyles((theme) => ({
-    rowReverseGrid: {
-        container: true,
-        direction: "row-reverse",
-        alignItems: "center",
-        justify: "center",
-    }
-}));
-
 class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isAdminFlipped: false,
             isProfessorFlipped: false,
-            isStudentFlipped: false
+            isStudentFlipped: false,
+            isButtonDisabled: true,
+            isTextFieldError: false,
+            login: '',
+            password: '',
+            repeatPassword: '',
+            userType: ''
         };
         this.flipAdminCard = this.flipAdminCard.bind(this);
         this.flipProfessorCard = this.flipProfessorCard.bind(this);
         this.flipStudentCard = this.flipStudentCard.bind(this);
+        this.handleChangeLogin = this.handleChangeLogin.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.onRegisterClick = this.onRegisterClick.bind(this);
+        this.handleChangeRepeatPassword = this.handleChangeRepeatPassword.bind(this);
     }
 
     flipAdminCard(e) {
@@ -64,6 +65,42 @@ class Registration extends React.Component {
     flipStudentCard(e) {
         e.preventDefault();
         this.setState(prevState => ({ isStudentFlipped: !prevState.isStudentFlipped, isAdminFlipped: false, isProfessorFlipped: false }));
+    }
+    handleChangeLogin(e) {
+        this.setState({login: e.target.value, userType: e.target.id});
+    }
+    handleChangePassword(e) {
+        this.setState({password: e.target.value});
+    }
+    handleChangeRepeatPassword(e) {
+        this.setState({repeatPassword: e.target.value})
+        if (this.state.password !== e.target.value) {
+            this.setState({isButtonDisabled: true, isTextFieldError: true})
+        } else if(this.state.login !== '') {
+            this.setState({isButtonDisabled: false, isTextFieldError: false})
+        }
+
+    }
+    onRegisterClick() {
+        let user = {
+            login: this.state.login,
+            password: this.state.password,
+            authority: this.state.userType
+        }
+        let response = API.postNewUser(JSON.stringify(user))
+            .then((response) => {
+                console.log(response.status)
+            })
+            .catch((err) => {
+                console.log(err.response.status)
+                if(err.response.status === 400) {
+                    this.setState({
+                        login: '',
+                        password: ''
+                    })
+                }
+            });
+
     }
 
         render() {
@@ -80,7 +117,7 @@ class Registration extends React.Component {
                         spacing={2}
                         direction={"row-reverse"}
                         alignItems={"center"}
-                        justify={"center"}
+                        justifyContent={"center"}
                     >
                         <Grid item xs={3}>
                             <ReactCardFlip isFlipped={this.state.isAdminFlipped}>
@@ -92,10 +129,15 @@ class Registration extends React.Component {
                                 <Card>
                                     <Grid container
                                         direction={"column"}>
-                                        <TextField required label="Login"/>
-                                        <TextField required label="Password" type={"password"}/>
-                                        <TextField required label="Repeat password" type={"password"}/>
-                                        <Button variant={"outlined"}>Register</Button>
+                                        <TextField required label="Login" onChange={this.handleChangeLogin} id={"Administrator"} value={this.state.login}/>
+                                        <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                                        <TextField required
+                                                   error={this.state.isTextFieldError}
+                                                   label={"Repeat password"}
+                                                   type={"password"}
+                                                   value={this.state.repeatPassword}
+                                                   onChange={this.handleChangeRepeatPassword}/>
+                                        <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
@@ -125,10 +167,15 @@ class Registration extends React.Component {
                                 <Card>
                                     <Grid container
                                           direction={"column"}>
-                                        <TextField required label="Login"/>
-                                        <TextField required label="Password" type={"password"}/>
-                                        <TextField required label="Repeat password" type={"password"}/>
-                                        <Button variant={"outlined"}>Register</Button>
+                                        <TextField required label="Login" onChange={this.handleChangeLogin} id={"Professor"} value={this.state.login}/>
+                                        <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                                        <TextField required
+                                                   error={this.state.isTextFieldError}
+                                                   label={"Repeat password"}
+                                                   type={"password"}
+                                                   value={this.state.repeatPassword}
+                                                   onChange={this.handleChangeRepeatPassword}/>
+                                        <Button variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
@@ -158,10 +205,15 @@ class Registration extends React.Component {
                                 <Card>
                                     <Grid container
                                           direction={"column"}>
-                                        <TextField required label="Login"/>
-                                        <TextField required label="Password" type={"password"}/>
-                                        <TextField required label="Repeat password" type={"password"}/>
-                                        <Button variant={"outlined"}>Register</Button>
+                                        <TextField required label="Login" onChange={this.handleChangeLogin} id={"Student"} value={this.state.login}/>
+                                        <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                                        <TextField required
+                                                   error={this.state.isTextFieldError}
+                                                   label={"Repeat password"}
+                                                   type={"password"}
+                                                   value={this.state.repeatPassword}
+                                                   onChange={this.handleChangeRepeatPassword}/>
+                                        <Button variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
