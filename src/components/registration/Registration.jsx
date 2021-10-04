@@ -4,30 +4,33 @@ import {
     Card, CardActions, CardMedia,
     Typography, TextField
 } from "@material-ui/core";
-import AdminImage from '../../img/admin.jpg'
-import ProfessorImage from '../../img/professor.jpg'
-import StudentImage from '../../img/student.jpg'
+import AdminImage from '../../img/registration/admin.jpg'
+import ProfessorImage from '../../img/registration/professor.jpg'
+import StudentImage from '../../img/registration/student.jpg'
 import ReactCardFlip from "react-card-flip";
 import {API} from "../../api/API";
+
+const minHeightCard = 185;
+const minWidthCard = 400;
 
 const styles = {
     adminCardAction: {
         justifyContent: 'center',
         backgroundImage: `url(${AdminImage})`,
-        minHeight: 165,
+        minHeight: minHeightCard,
     },
     professorCardAction: {
         justifyContent: 'center',
         backgroundImage: `url(${ProfessorImage})`,
-        minHeight: 165,
+        minHeight: minHeightCard,
     },
     studentCardAction: {
         justifyContent: 'center',
         backgroundImage: `url(${StudentImage})`,
-        minHeight: 165,
+        minHeight: minHeightCard,
     },
     cardMedia: {
-        minHeight: 185,
+        minHeight: minHeightCard+18,
     },
 }
 
@@ -40,6 +43,7 @@ class Registration extends React.Component {
             isStudentFlipped: false,
             isButtonDisabled: true,
             isTextFieldError: false,
+            itemXs: 4,
             login: '',
             password: '',
             repeatPassword: '',
@@ -107,121 +111,129 @@ class Registration extends React.Component {
 
             return (
                 <Grid
-
+                    container
+                    direction={"column"}
+                    spacing={3}
                 >
                     {/*> Administrator card pair*/}
-                    <Grid
-                        container
-                        spacing={2}
-                        direction={"row-reverse"}
-                        alignItems={"center"}
-                        justifyContent={"center"}
-                    >
-                        <Grid item xs={3}>
-                            <ReactCardFlip isFlipped={this.state.isAdminFlipped}>
+                    <Grid item>
+                        <Grid
+                            container
+                            spacing={3}
+                            direction={"row-reverse"}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                        >
+                            <Grid item xs={this.state.itemXs}>
+                                <ReactCardFlip isFlipped={this.state.isAdminFlipped}>
+                                    <Card>
+                                        <CardActions style={styles.adminCardAction}>
+                                            <Button variant={"outlined"} onClick={this.flipAdminCard}>Administrator</Button>
+                                        </CardActions>
+                                    </Card>
+                                    <Card>
+                                        <Grid
+                                            container
+                                            direction={"column"}>
+                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Administrator"} value={this.state.login}/>
+                                            <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                                            <TextField required
+                                                       error={this.state.isTextFieldError}
+                                                       label={"Repeat password"}
+                                                       type={"password"}
+                                                       value={this.state.repeatPassword}
+                                                       onChange={this.handleChangeRepeatPassword}/>
+                                            <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+                                        </Grid>
+                                    </Card>
+                                </ReactCardFlip>
+                            </Grid>
+                            <Grid item xs={this.state.itemXs}>
                                 <Card>
-                                    <CardActions style={styles.adminCardAction}>
-                                        <Button variant={"outlined"} onClick={this.flipAdminCard}>Administrator</Button>
-                                    </CardActions>
+                                    <CardMedia image={AdminImage} style={styles.cardMedia}/>
                                 </Card>
-                                <Card>
-                                    <Grid container
-                                        direction={"column"}>
-                                        <TextField required label="Login" onChange={this.handleChangeLogin} id={"Administrator"} value={this.state.login}/>
-                                        <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
-                                        <TextField required
-                                                   error={this.state.isTextFieldError}
-                                                   label={"Repeat password"}
-                                                   type={"password"}
-                                                   value={this.state.repeatPassword}
-                                                   onChange={this.handleChangeRepeatPassword}/>
-                                        <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
-                                    </Grid>
-                                </Card>
-                            </ReactCardFlip>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Card>
-                                <CardMedia image={AdminImage} style={styles.cardMedia}/>
-                            </Card>
+                            </Grid>
                         </Grid>
                     </Grid>
 
                     {/*> Professor card pair*/}
-                    <Grid
-                        container
-                        spacing={3}
-                        direction={"row"}
-                        alignItems={"center"}
-                        justify={"center"}
-                    >
-                        <Grid item xs={3}>
-                            <ReactCardFlip isFlipped={this.state.isProfessorFlipped}>
+                    <Grid item>
+                        <Grid
+                            container
+                            spacing={3}
+                            direction={"row"}
+                            alignItems={"center"}
+                            justify={"center"}
+                        >
+                            <Grid item xs={this.state.itemXs}>
+                                <ReactCardFlip isFlipped={this.state.isProfessorFlipped}>
+                                    <Card>
+                                        <CardActions style={styles.professorCardAction}>
+                                            <Button variant={"outlined"} onClick={this.flipProfessorCard}>Professor</Button>
+                                        </CardActions>
+                                    </Card>
+                                    <Card>
+                                        <Grid container
+                                              direction={"column"}>
+                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Professor"} value={this.state.login}/>
+                                            <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                                            <TextField required
+                                                       error={this.state.isTextFieldError}
+                                                       label={"Repeat password"}
+                                                       type={"password"}
+                                                       value={this.state.repeatPassword}
+                                                       onChange={this.handleChangeRepeatPassword}/>
+                                            <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+                                        </Grid>
+                                    </Card>
+                                </ReactCardFlip>
+                            </Grid>
+                            <Grid item xs={this.state.itemXs}>
                                 <Card>
-                                    <CardActions style={styles.professorCardAction}>
-                                        <Button variant={"outlined"} onClick={this.flipProfessorCard}>Professor</Button>
-                                    </CardActions>
+                                    <CardMedia image={ProfessorImage} style={styles.cardMedia}/>
                                 </Card>
-                                <Card>
-                                    <Grid container
-                                          direction={"column"}>
-                                        <TextField required label="Login" onChange={this.handleChangeLogin} id={"Professor"} value={this.state.login}/>
-                                        <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
-                                        <TextField required
-                                                   error={this.state.isTextFieldError}
-                                                   label={"Repeat password"}
-                                                   type={"password"}
-                                                   value={this.state.repeatPassword}
-                                                   onChange={this.handleChangeRepeatPassword}/>
-                                        <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
-                                    </Grid>
-                                </Card>
-                            </ReactCardFlip>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={3}>
-                            <Card>
-                                <CardMedia image={ProfessorImage} style={styles.cardMedia}/>
-                            </Card>
-                        </Grid>
-                    </Grid>
-
-                    {/*> Student card pair*/}
-                    <Grid
-                        container
-                        spacing={3}
-                        direction={"row-reverse"}
-                        alignItems={"center"}
-                        justify={"center"}
-                    >
-                        <Grid item xs={3}>
-                            <ReactCardFlip isFlipped={this.state.isStudentFlipped}>
-                                <Card>
-                                    <CardActions style={styles.studentCardAction}>
-                                        <Button variant={"outlined"} onClick={this.flipStudentCard}>Student</Button>
-                                    </CardActions>
-                                </Card>
-                                <Card>
-                                    <Grid container
-                                          direction={"column"}>
-                                        <TextField required label="Login" onChange={this.handleChangeLogin} id={"Student"} value={this.state.login}/>
-                                        <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
-                                        <TextField required
-                                                   error={this.state.isTextFieldError}
-                                                   label={"Repeat password"}
-                                                   type={"password"}
-                                                   value={this.state.repeatPassword}
-                                                   onChange={this.handleChangeRepeatPassword}/>
-                                        <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
-                                    </Grid>
-                                </Card>
-                            </ReactCardFlip>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Card>
-                                <CardMedia image={StudentImage} style={styles.cardMedia}/>
-                            </Card>
                         </Grid>
 
+                        {/*> Student card pair*/}
+                        <Grid item>
+                        <Grid
+                            container
+                            spacing={3}
+                            direction={"row-reverse"}
+                            alignItems={"center"}
+                            justify={"center"}
+                        >
+                            <Grid item xs={this.state.itemXs}>
+                                <ReactCardFlip isFlipped={this.state.isStudentFlipped}>
+                                    <Card>
+                                        <CardActions style={styles.studentCardAction}>
+                                            <Button variant={"outlined"} onClick={this.flipStudentCard}>Student</Button>
+                                        </CardActions>
+                                    </Card>
+                                    <Card>
+                                        <Grid container
+                                              direction={"column"}>
+                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Student"} value={this.state.login}/>
+                                            <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                                            <TextField required
+                                                       error={this.state.isTextFieldError}
+                                                       label={"Repeat password"}
+                                                       type={"password"}
+                                                       value={this.state.repeatPassword}
+                                                       onChange={this.handleChangeRepeatPassword}/>
+                                            <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+                                        </Grid>
+                                    </Card>
+                                </ReactCardFlip>
+                            </Grid>
+                            <Grid item xs={this.state.itemXs}>
+                                <Card>
+                                    <CardMedia image={StudentImage} style={styles.cardMedia}/>
+                                </Card>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             );

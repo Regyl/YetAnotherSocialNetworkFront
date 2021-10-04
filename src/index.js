@@ -11,7 +11,7 @@ const history = createBrowserHistory()
 ReactDOM.render(
     <BrowserRouter history={history}>
         <StylesProvider injectFirst>
-            <App/>
+            <App style={{width: '100%', height: '100%'}}/>
         </StylesProvider>
     </BrowserRouter>,
   document.getElementById('root')
