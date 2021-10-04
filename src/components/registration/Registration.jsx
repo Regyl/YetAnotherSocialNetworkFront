@@ -106,11 +106,9 @@ class Registration extends React.Component {
         render() {
 
             return (
-                <Grid>
-                    <Typography align={"center"} >
-                        Choose your champion
-                    </Typography>
+                <Grid
 
+                >
                     {/*> Administrator card pair*/}
                     <Grid
                         container
@@ -175,7 +173,7 @@ class Registration extends React.Component {
                                                    type={"password"}
                                                    value={this.state.repeatPassword}
                                                    onChange={this.handleChangeRepeatPassword}/>
-                                        <Button variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+                                        <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
@@ -213,7 +211,7 @@ class Registration extends React.Component {
                                                    type={"password"}
                                                    value={this.state.repeatPassword}
                                                    onChange={this.handleChangeRepeatPassword}/>
-                                        <Button variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+                                        <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
                                     </Grid>
                                 </Card>
                             </ReactCardFlip>
