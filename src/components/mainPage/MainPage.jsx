@@ -1,98 +1,65 @@
 import React from 'react';
 import {
-    Box,
-    Toolbar,
-    IconButton,
-    Typography,
-    Button,
-    AppBar,
-    MenuItem,
-    Menu,
-    makeStyles,
-    withStyles
+    Box, Card, CardMedia, Grid, Paper, Typography
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import {AccountCircle} from "@material-ui/icons";
-import {Link} from "react-router-dom";
+import FirstImage from '../../img/mainPage/mainBack1.jpg';
+import SecondImage from '../../img/mainPage/mainBack2.jpg';
+import {brown} from "@material-ui/core/colors";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
+
+const styles = {
+    backGrid : {
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
+        zIndex: 1,
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    secondBackGrid: {
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
+        zIndex: 2,
     },
-    title: {
-        flexGrow: 1,
-        display: 'none',
-        [
-            theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
+    firstCard: {
+        height: '70%',
+        width: '65%',
+        position: 'relative',
+        zIndex: 1,
     },
-}));
+    secondCard: {
+        height: '70%',
+        width: '50%',
+        position: 'relative',
+        zIndex: 2,
+        top: '14%',
+        left: '20%',
+    },
+    secondTypography: {
+        position: 'fixed',
+        top: '20%',
+        left: '34%',
+        zIndex: 3,
+        color: '#55430C',
+        fontFamily: 'Cardo',
+    },
+};
 
+class MainPage extends React.Component {
 
-const MainPage = (props) => {
-
-        const classes = useStyles(MainPage);
-        const [anchorEl, setAnchorEl] = React.useState(null);
-        const open = Boolean(anchorEl);
-        const handleClick = (event) => {
-            setAnchorEl(event.currentTarget);
-        };
-        const handleClose = () => {
-            setAnchorEl(null);
-        };
-
-        //const {history} = props
+    render() {
 
         return (
-            <Box className={classes.root}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            className={classes.menuButton}
-                            color="inherit"
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Testing System
-                        </Typography>
-                        <IconButton
-                            id="basic-button"
-                            aria-controls="basic-menu"
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            onClick={handleClick}
-                        >
-                            <AccountCircle/>
-                        </IconButton>
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
-                        >
-                            <MenuItem
-                                linkButton
-                                component={Link}
-                                to={'authorisation'}
-                            >Sign in</MenuItem>
-                            <MenuItem
-                                linkButton
-                                component={Link}
-                                to={'registration'}
-                            >Sign up</MenuItem>
-                        </Menu>
-                    </Toolbar>
-                </AppBar>
-            </Box>
-        );
+            <Grid container>
+                <Grid item style={styles.backGrid}>
+                    <CardMedia image={FirstImage} style={styles.firstCard}/>
+                </Grid>
+                <Grid item style={styles.secondBackGrid}>
+                    <CardMedia image={SecondImage} style={styles.secondCard}/>
+                    <Typography variant={"h2"} style={styles.secondTypography}>Testing System</Typography>
+                </Grid>
+            </Grid>
+        )
+    };
 }
 
 export default MainPage;
