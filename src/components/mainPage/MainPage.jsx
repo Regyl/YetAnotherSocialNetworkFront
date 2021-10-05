@@ -8,6 +8,7 @@ import ThirdImage from '../../img/mainPage/mainBack3.jpg';
 import {Link, Router} from "react-router-dom";
 
 const testingSystemColor = '#55430C';
+const circleSize = 600;
 
 const styles = {
     backGrid : {
@@ -31,8 +32,10 @@ const styles = {
     firstCard: {
         height: '70%',
         width: '65%',
-        position: 'relative',
+        position: 'fixed',
         zIndex: 1,
+        top: '0%',
+        left: '0%',
     },
     secondCard: {
         height: '70%',
@@ -43,7 +46,7 @@ const styles = {
         left: '20%',
     },
     thirdCard: {
-        height: '35%',
+        height: '40%',
         width: '25%',
         position: 'fixed',
         zIndex: 3,
@@ -53,14 +56,14 @@ const styles = {
     secondTypography: {
         position: 'fixed',
         top: '20%',
-        left: '40.5%',
+        left: '38%',
         zIndex: 3,
         color: testingSystemColor,
         fontFamily: 'Cardo',
     },
     thirdTypography: {
         position: 'fixed',
-        top: '37%',
+        top: '40%',
         left: '75%',
         zIndex: 3,
         color: '#654321',
@@ -80,7 +83,42 @@ const styles = {
         width: '10%',
         height: '10%',
     },
+    circle: {
+        position: 'fixed',
+        bgcolor: '#C8BDAC',
+        width: circleSize,
+        height: circleSize,
+        borderRadius: '100%',
+        zIndex: 2,
+        top: '60%',
+        left: '75%',
+    },
+    firstBox: {
+        position: 'fixed',
+        top: '83%',
+        left: '25%',
+        width: '100%',
+        height: '0.3%',
+        zIndex: 3,
+        bgcolor: 'black'
+    },
+    secondBox: {
+        position: 'fixed',
+        top: '87%',
+        left: '65%',
+        width: '100%',
+        height: '0.3%',
+        zIndex: 3,
+        bgcolor: 'black'
+    },
 };
+
+const shapeStyles = { bgcolor: 'primary.main', width: 40, height: 40 };
+const shapeCircleStyles = { borderRadius: '50%' };
+const circle = (
+    <Box component="span" sx={{ ...shapeStyles, ...shapeCircleStyles }} />
+);
+
 
 class MainPage extends React.Component {
 
@@ -100,14 +138,21 @@ class MainPage extends React.Component {
                     </Grid>
                     <Grid item style={styles.gridButtonGroup}>
                         <ButtonGroup variant={'text'} style={{width: '100%', height: '100%'}}>
-                            <Button component={Link} to={'/authorisation'} style={styles.buttonsStyle}>SIGN IN</Button>
-                            <Button component={Link} to={'/registration'} style={styles.buttonsStyle}>SIGN UP</Button>
+                            <Button component={Link} to={'/authorisation'} style={styles.buttonsStyle}>
+                                <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>SIGN IN</Typography>
+                            </Button>
+                            <Button component={Link} to={'/registration'} style={styles.buttonsStyle}>
+                                <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>SIGN UP</Typography>
+                            </Button>
                         </ButtonGroup>
                     </Grid>
                     <Grid item style={styles.thirdBackGrid}>
                         <CardMedia image={ThirdImage} style={styles.thirdCard}/>
-                        <Typography variant={'h2'} style={styles.thirdTypography}>WELCOME TO THE TESTING SYSTEM - OPEN SOURCE PROJECT WITH ONLY ONE GOAL - EDUCATION</Typography>
+                        <Typography variant={'h3'} style={styles.thirdTypography}>WELCOME TO THE TESTING SYSTEM - OPEN SOURCE PROJECT WITH ONLY ONE GOAL - EDUCATION</Typography>
                     </Grid>
+                    <Box component="span"  sx={styles.circle} />
+                    <Box component={"span"} sx={styles.firstBox} />
+                    <Box component={"span"} sx={styles.secondBox} />
                 </Router>
             </Grid>
         )
