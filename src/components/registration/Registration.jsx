@@ -37,7 +37,7 @@ const styles = {
 class Registration extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             isAdminFlipped: false,
             isProfessorFlipped: false,
             isStudentFlipped: false,
@@ -56,7 +56,7 @@ class Registration extends React.Component {
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.onRegisterClick = this.onRegisterClick.bind(this);
         this.handleChangeRepeatPassword = this.handleChangeRepeatPassword.bind(this);
-    }
+    };
 
     flipAdminCard(e) {
         e.preventDefault();
