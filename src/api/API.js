@@ -2,8 +2,6 @@ import * as axios from "axios";
 
 const BASE_URL = "http://localhost:8080";
 
-
-
 const instance = axios.create({
     baseURL: BASE_URL,
     method: "GET",
@@ -30,20 +28,15 @@ const login = axios.create({
     },
 });
 
-let cookie;
-
 
 export const API = {
-    setCookie(value) {
-        cookie=value;
-    },
     postNewUser(user) {
         return headerInstance.post("/register", user);
     },
     loginIn(user) {
-        return login.post('/sign-in', user);
+        return login.post('/sign-in', user, {withCredentials: true});
     },
     getStudents() {
-        return headerInstance.get('/students').header("Cookie", cookie);
+        return headerInstance.get('/students');
     }
 }
