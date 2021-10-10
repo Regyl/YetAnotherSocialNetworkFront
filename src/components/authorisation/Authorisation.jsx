@@ -1,6 +1,7 @@
 import React from 'react';
 import {Box, Button, Card, Chip, Grid, TextField} from "@material-ui/core";
 import {API} from "../../api/API";
+import {Redirect, useHistory} from "react-router-dom";
 
 const styles = {
     mainForm : {
@@ -13,7 +14,6 @@ const styles = {
 
 }
 
-
 class Authorisation extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +21,8 @@ class Authorisation extends React.Component {
             login: '',
             password: '',
             isButtonDisabled: true,
-            chipVisible: 'none'
+            chipVisible: 'none',
+            redirect: null
         }
         this.handleChangeLogin = this.handleChangeLogin.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -32,11 +33,13 @@ class Authorisation extends React.Component {
         this.setState({login: e.target.value});
     }
     handleChangePassword(e) {
-        this.setState({password: e.target.value, isButtonDisabled: this.login == '' });
+        this.setState({password: e.target.value, isButtonDisabled: this.login === '' });
     }
-    onLoginClick(e) {
+    onLoginClick() {
         let user = 'username='+this.state.login+'&password='+this.state.password;
-        API.loginIn(user).catch((err) => {
+        API.loginIn(user).then(
+            this.props.history.push('/account')
+        ).catch((err) => {
             if(err.response.status === 400)
                 this.handleErrorLogin();
         });
@@ -58,7 +61,7 @@ class Authorisation extends React.Component {
                               direction={"column"}
                               style={styles.mainForm}>
                             <Chip label="Incorrect login or password" variant="outlined" style={{display: this.state.chipVisible, color: 'red'}}/>
-                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Administrator"} value={this.state.login}/>
+                            <TextField required label="Login" onChange={this.handleChangeLogin} value={this.state.login}/>
                             <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
                             <Button variant={"outlined"} onClick={this.onLoginClick} disabled={this.state.isButtonDisabled}>Sign in</Button>
                         </Grid>
