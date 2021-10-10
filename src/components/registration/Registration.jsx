@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Grid, Button,
     Card, CardActions, CardMedia,
-    Typography, TextField
+    Typography, TextField, Chip
 } from "@material-ui/core";
 import AdminImage from '../../img/registration/admin.jpg'
 import ProfessorImage from '../../img/registration/professor.jpg'
@@ -32,6 +32,9 @@ const styles = {
     cardMedia: {
         minHeight: minHeightCard+18,
     },
+    errorChip : {
+
+    }
 }
 
 class Registration extends React.Component {
@@ -47,7 +50,8 @@ class Registration extends React.Component {
             login: '',
             password: '',
             repeatPassword: '',
-            userType: ''
+            userType: '',
+            chipVisible: 'none',
         };
         this.flipAdminCard = this.flipAdminCard.bind(this);
         this.flipProfessorCard = this.flipProfessorCard.bind(this);
@@ -91,16 +95,19 @@ class Registration extends React.Component {
             password: this.state.password,
             authority: this.state.userType
         }
-        let response = API.postNewUser(JSON.stringify(user))
-            .then((response) => {
-                console.log(response.status)
-            })
+        API.postNewUser(JSON.stringify(user))
+            .then(() => {
+                    user = "username=" + this.state.login + "&password=" + this.state.password;
+                    API.loginIn(user).then(this.props.history.push('/account'));
+                }
+            )
             .catch((err) => {
-                console.log(err.response.status)
                 if(err.response.status === 400) {
                     this.setState({
                         login: '',
-                        password: ''
+                        password: '',
+                        repeatPassword: '',
+                        chipVisible: true
                     })
                 }
             });
@@ -234,7 +241,12 @@ class Registration extends React.Component {
                                 </Card>
                             </Grid>
                         </Grid>
+
                     </Grid>
+                    <Chip label="User with this login already exists!"
+                          variant="outlined"
+                          style={{display: this.state.chipVisible, color: '#C02402',  width: '20%', top: '50%', left: '40%', position: 'relative'}}
+                    />
                 </Grid>
             );
         }
