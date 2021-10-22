@@ -62,6 +62,7 @@ class Registration extends React.Component {
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.onRegisterClick = this.onRegisterClick.bind(this);
         this.handleChangeRepeatPassword = this.handleChangeRepeatPassword.bind(this);
+        this.getTextFields = this.getTextFields.bind(this);
     };
 
     flipAdminCard(e) {
@@ -141,19 +142,7 @@ class Registration extends React.Component {
                                         </CardActions>
                                     </Card>
                                     <Card>
-                                        <Grid
-                                            container
-                                            direction={"column"}>
-                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={Profession.Administrator} value={this.state.login}/>
-                                            <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
-                                            <TextField required
-                                                       error={this.state.isTextFieldError}
-                                                       label={"Repeat password"}
-                                                       type={"password"}
-                                                       value={this.state.repeatPassword}
-                                                       onChange={this.handleChangeRepeatPassword}/>
-                                            <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
-                                        </Grid>
+                                        {this.getTextFields(Profession.Administrator)}
                                     </Card>
                                 </ReactCardFlip>
                             </Grid>
@@ -182,18 +171,7 @@ class Registration extends React.Component {
                                         </CardActions>
                                     </Card>
                                     <Card>
-                                        <Grid container
-                                              direction={"column"}>
-                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={Profession.Professor} value={this.state.login}/>
-                                            <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
-                                            <TextField required
-                                                       error={this.state.isTextFieldError}
-                                                       label={"Repeat password"}
-                                                       type={"password"}
-                                                       value={this.state.repeatPassword}
-                                                       onChange={this.handleChangeRepeatPassword}/>
-                                            <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
-                                        </Grid>
+                                        {this.getTextFields(Profession.Professor)}
                                     </Card>
                                 </ReactCardFlip>
                             </Grid>
@@ -222,18 +200,7 @@ class Registration extends React.Component {
                                         </CardActions>
                                     </Card>
                                     <Card>
-                                        <Grid container
-                                              direction={"column"}>
-                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={Profession.Student} value={this.state.login}/>
-                                            <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
-                                            <TextField required
-                                                       error={this.state.isTextFieldError}
-                                                       label={"Repeat password"}
-                                                       type={"password"}
-                                                       value={this.state.repeatPassword}
-                                                       onChange={this.handleChangeRepeatPassword}/>
-                                            <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
-                                        </Grid>
+                                        {this.getTextFields(Profession.Student)}
                                     </Card>
                                 </ReactCardFlip>
                             </Grid>
@@ -254,5 +221,23 @@ class Registration extends React.Component {
                 </Grid>
             );
         }
+
+    getTextFields(profession) {
+        return (
+            <Grid
+                container
+                direction={"column"}>
+                <TextField required label="Login" onChange={this.handleChangeLogin} id={profession} value={this.state.login}/>
+                <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                <TextField required
+                           error={this.state.isTextFieldError}
+                           label={"Repeat password"}
+                           type={"password"}
+                           value={this.state.repeatPassword}
+                           onChange={this.handleChangeRepeatPassword}/>
+                <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+            </Grid>
+        );
+    }
 }
 export default Registration;
