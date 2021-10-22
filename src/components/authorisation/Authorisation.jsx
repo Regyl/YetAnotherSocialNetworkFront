@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, Card, Chip, Grid, TextField} from "@material-ui/core";
 import {API} from "../../api/API";
-import {Redirect, useHistory} from "react-router-dom";
+import BackButton from "../../utils/backButton";
 
 const styles = {
     mainForm : {
@@ -64,6 +64,7 @@ class Authorisation extends React.Component {
                             <TextField required label="Login" onChange={this.handleChangeLogin} value={this.state.login}/>
                             <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
                             <Button variant={"outlined"} onClick={this.onLoginClick} disabled={this.state.isButtonDisabled}>Sign in</Button>
+                            <BackButton />
                         </Grid>
                 </Grid>
             </Grid>

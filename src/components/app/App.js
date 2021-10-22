@@ -8,7 +8,6 @@ import Account from "../lk/Account";
 
 const App = (props) => {
     const { history } = props
-
     return (
           <Switch history={history}>
               <Route path='/home' component={MainPage} />

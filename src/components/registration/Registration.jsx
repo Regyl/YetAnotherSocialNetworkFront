@@ -9,6 +9,7 @@ import ProfessorImage from '../../img/registration/professor.jpg'
 import StudentImage from '../../img/registration/student.jpg'
 import ReactCardFlip from "react-card-flip";
 import {API} from "../../api/API";
+import BackButton from "../../utils/backButton";
 
 const minHeightCard = 185;
 const minWidthCard = 400;
@@ -247,6 +248,8 @@ class Registration extends React.Component {
                           variant="outlined"
                           style={{display: this.state.chipVisible, color: '#C02402',  width: '20%', top: '50%', left: '40%', position: 'relative'}}
                     />
+
+                    <BackButton />
                 </Grid>
             );
         }
