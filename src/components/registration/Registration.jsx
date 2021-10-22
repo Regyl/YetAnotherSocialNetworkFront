@@ -10,6 +10,7 @@ import StudentImage from '../../img/registration/student.jpg'
 import ReactCardFlip from "react-card-flip";
 import {API} from "../../api/API";
 import BackButton from "../../utils/backButton";
+import Profession from "../../utils/Profession";
 
 const minHeightCard = 185;
 const minWidthCard = 400;
@@ -143,7 +144,7 @@ class Registration extends React.Component {
                                         <Grid
                                             container
                                             direction={"column"}>
-                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Administrator"} value={this.state.login}/>
+                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={Profession.Administrator} value={this.state.login}/>
                                             <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
                                             <TextField required
                                                        error={this.state.isTextFieldError}
@@ -183,7 +184,7 @@ class Registration extends React.Component {
                                     <Card>
                                         <Grid container
                                               direction={"column"}>
-                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Professor"} value={this.state.login}/>
+                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={Profession.Professor} value={this.state.login}/>
                                             <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
                                             <TextField required
                                                        error={this.state.isTextFieldError}
@@ -223,7 +224,7 @@ class Registration extends React.Component {
                                     <Card>
                                         <Grid container
                                               direction={"column"}>
-                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={"Student"} value={this.state.login}/>
+                                            <TextField required label="Login" onChange={this.handleChangeLogin} id={Profession.Student} value={this.state.login}/>
                                             <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
                                             <TextField required
                                                        error={this.state.isTextFieldError}
