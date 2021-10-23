@@ -1,9 +1,22 @@
-import {AppBar, Box, Button, Grid, IconButton, Tab, Tabs, Toolbar, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    Grid,
+    IconButton,
+    Menu, MenuItem,
+    Tab,
+    Tabs,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, {Component, useState} from "react";
 import {withRouter} from "react-router-dom";
 import Profession from "../../enums/Profession";
 import TabNumber from "./TabNumber";
+import {AccountCircle} from "@material-ui/icons";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -49,8 +62,11 @@ class Account extends Component {
             isCompilationStudentListVisible: false,
             isCompilationSubjectListVisible: false,
             isStudentResultListVisible: false,
+            anchorEl: null
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleMenu = this.handleMenu.bind(this);
     }
 
     componentDidMount() {
@@ -66,7 +82,7 @@ class Account extends Component {
                     isCompilationStudentListVisible: true,
                     isCompilationSubjectListVisible: true,
                     isStudentResultListVisible: true
-                })
+                });
                 break;
             default:
                 console.log('error');
@@ -79,12 +95,55 @@ class Account extends Component {
         this.setState({value: newValue});
     };
 
+    handleClose = () => {
+        this.setState({anchorEl: null})
+    };
+
+    handleMenu = (event) => {
+        this.setState({anchorEl: event.currentTarget})
+    };
+
 
     render() {
         return (
             <Grid container>
-                <Box style={{color: 'inherit', width: '100%'}}/>
-                <Box style={{width: '100%'}}>
+                <Grid item style={{width: '100%'}}>
+                    <Box>
+                        <AppBar position="static">
+                            <Toolbar>
+                                <Typography variant="h6" component="div">
+                                    Testing System
+                                </Typography>
+                                <IconButton
+                                    size="large"
+                                    color="inherit"
+                                    onClick={this.handleMenu}
+                                    style={{marginLeft: 'auto'}}
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    anchorEl={this.state.anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                                </Menu>
+                            </Toolbar>
+                        </AppBar>
+                    </Box>
+                </Grid>
+                <Grid item style={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                         <Tabs value={this.state.value} onChange={this.handleChange}>
                             {this.state.isCompilationStudentListVisible &&
@@ -114,7 +173,7 @@ class Account extends Component {
                     <TabPanel value={this.state.value} index={TabNumber.Four}>
                         Item Fifth
                     </TabPanel>
-                </Box>
+                </Grid>
             </Grid>
         );
     }

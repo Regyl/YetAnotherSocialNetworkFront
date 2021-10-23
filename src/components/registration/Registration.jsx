@@ -97,7 +97,9 @@ class Registration extends React.Component {
         API.postNewUser(JSON.stringify(user))
             .then(() => {
                     user = "username=" + this.state.login + "&password=" + this.state.password;
-                    API.loginIn(user).then(this.props.history.push(HistoryPaths.Account));
+                    API.loginIn(user).then((resp) => {
+                        this.props.history.push({pathname: HistoryPaths.Account, state: {profession: resp.data}});
+                    });
                 }
             )
             .catch((err) => {
