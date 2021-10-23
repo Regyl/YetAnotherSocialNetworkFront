@@ -1,17 +1,13 @@
 import React from 'react';
-import {
-    Grid, Button,
-    Card, CardActions, CardMedia,
-    Typography, TextField, Chip
-} from "@material-ui/core";
+import {Button, Card, CardActions, CardMedia, Chip, Grid, TextField} from "@material-ui/core";
 import AdminImage from '../../img/registration/admin.jpg'
 import ProfessorImage from '../../img/registration/professor.jpg'
 import StudentImage from '../../img/registration/student.jpg'
 import ReactCardFlip from "react-card-flip";
 import {API} from "../../api/API";
-import BackButton from "../../utils/backButton";
-import Profession from "../../utils/Profession";
-import HistoryPaths from "../../utils/HistoryPaths";
+import BackButton from "../backButton";
+import Profession from "../../enums/Profession";
+import HistoryPaths from "../../enums/HistoryPaths";
 
 const minHeightCard = 185;
 

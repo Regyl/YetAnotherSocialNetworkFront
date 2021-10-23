@@ -1,7 +1,8 @@
 import React from 'react';
-import {Box, Button, Card, Chip, Grid, TextField} from "@material-ui/core";
+import {Button, Chip, Grid, TextField} from "@material-ui/core";
 import {API} from "../../api/API";
-import BackButton from "../../utils/backButton";
+import BackButton from "../backButton";
+import HistoryPaths from "../../enums/HistoryPaths";
 
 const styles = {
     mainForm : {
@@ -37,9 +38,9 @@ class Authorisation extends React.Component {
     }
     onLoginClick() {
         let user = 'username='+this.state.login+'&password='+this.state.password;
-        API.loginIn(user).then(
-            this.props.history.push('/account')
-        ).catch((err) => {
+        API.loginIn(user).then((response) => {
+            this.props.history.push({pathname: HistoryPaths.Account, state: {profession: response.data}});
+        }).catch((err) => {
             if(err.response.status === 400)
                 this.handleErrorLogin();
         });

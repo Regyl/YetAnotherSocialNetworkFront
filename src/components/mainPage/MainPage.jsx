@@ -1,11 +1,20 @@
 import React from 'react';
 import {
-    Box, Button, ButtonGroup, Card, CardMedia, Grid, Paper, Typography
+    Box,
+    Button,
+    ButtonGroup,
+    CardMedia,
+    createTheme,
+    Grid,
+    responsiveFontSizes,
+    ThemeProvider,
+    Typography
 } from "@material-ui/core";
 import FirstImage from '../../img/mainPage/mainBack1.jpg';
 import SecondImage from '../../img/mainPage/mainBack2.jpg';
 import ThirdImage from '../../img/mainPage/mainBack3.jpg';
 import {Link, Router} from "react-router-dom";
+import HistoryPaths from "../../enums/HistoryPaths";
 
 const testingSystemColor = '#55430C';
 const circleSize = 600;
@@ -67,7 +76,7 @@ const styles = {
         left: '75%',
         zIndex: 3,
         color: '#654321',
-        fontFamily: 'Versailles'
+        fontFamily: 'Versailles',
     },
     gridButtonGroup: {
         width: '100%',
@@ -113,11 +122,9 @@ const styles = {
     },
 };
 
-const shapeStyles = { bgcolor: 'primary.main', width: 40, height: 40 };
-const shapeCircleStyles = { borderRadius: '50%' };
-const circle = (
-    <Box component="span" sx={{ ...shapeStyles, ...shapeCircleStyles }} />
-);
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+const text = "WELCOME TO THE TESTING SYSTEM - OPEN SOURCE PROJECT WITH ONLY ONE GOAL - EDUCATION";
 
 
 class MainPage extends React.Component {
@@ -138,17 +145,21 @@ class MainPage extends React.Component {
                     </Grid>
                     <Grid item style={styles.gridButtonGroup}>
                         <ButtonGroup variant={'text'} style={{width: '100%', height: '100%'}}>
-                            <Button component={Link} to={'/authorisation'} style={styles.buttonsStyle}>
+                            <Button component={Link} to={HistoryPaths.Auth} style={styles.buttonsStyle}>
                                 <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>SIGN IN</Typography>
                             </Button>
-                            <Button component={Link} to={'/registration'} style={styles.buttonsStyle}>
+                            <Button component={Link} to={HistoryPaths.Registration} style={styles.buttonsStyle}>
                                 <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>SIGN UP</Typography>
                             </Button>
                         </ButtonGroup>
                     </Grid>
                     <Grid item style={styles.thirdBackGrid}>
                         <CardMedia image={ThirdImage} style={styles.thirdCard}/>
-                        <Typography variant={'h3'} style={styles.thirdTypography}>WELCOME TO THE TESTING SYSTEM - OPEN SOURCE PROJECT WITH ONLY ONE GOAL - EDUCATION</Typography>
+                        <ThemeProvider theme={theme}>
+                            <Typography variant={"h4"} style={styles.thirdTypography}>
+                                {text}
+                            </Typography>
+                        </ThemeProvider>
                     </Grid>
                     <Box component="span"  sx={styles.circle} />
                     <Box component={"span"} sx={styles.firstBox} />

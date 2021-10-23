@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import StylesProvider from '@material-ui/styles/StylesProvider'
 import reportWebVitals from './reportWebVitals';
 import {createBrowserHistory} from 'history'
-import {BrowserRouter, Router} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import App from "./components/app/App";
 
 const history = createBrowserHistory()

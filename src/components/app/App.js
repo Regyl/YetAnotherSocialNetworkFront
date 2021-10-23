@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {Route, Switch, Redirect, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import MainPage from "../mainPage/MainPage";
 import Registration from "../registration/Registration";
 import Authorisation from "../authorisation/Authorisation";
 import Account from "../lk/Account";
-import HistoryPaths from "../../utils/HistoryPaths";
+import HistoryPaths from "../../enums/HistoryPaths";
 
 const App = (props) => {
     const { history } = props
