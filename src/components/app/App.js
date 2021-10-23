@@ -5,16 +5,17 @@ import MainPage from "../mainPage/MainPage";
 import Registration from "../registration/Registration";
 import Authorisation from "../authorisation/Authorisation";
 import Account from "../lk/Account";
+import HistoryPaths from "../../utils/HistoryPaths";
 
 const App = (props) => {
     const { history } = props
     return (
           <Switch history={history}>
-              <Route path='/home' component={MainPage} />
-              <Route path='/registration' component={Registration} />
-              <Route path={'/authorisation'} component={Authorisation} />
-              <Route path={'/account'} component={Account} />
-            <Redirect from='/' to='/home'/>
+              <Route path={HistoryPaths.Home} component={MainPage} />
+              <Route path={HistoryPaths.Registration} component={Registration} />
+              <Route path={HistoryPaths.Auth} component={Authorisation} />
+              <Route path={HistoryPaths.Account} component={Account} />
+            <Redirect from='/' to={HistoryPaths.Home}/>
           </Switch>
     );
 }

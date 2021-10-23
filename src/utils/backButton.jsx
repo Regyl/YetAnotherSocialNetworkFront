@@ -11,7 +11,7 @@ class backButton extends Component {
 
     render() {
         return (
-            <Button onClick={this.onBackClick}>
+            <Button onClick={this.onBackClick} variant={"outlined"}>
                 Back
             </Button>
 

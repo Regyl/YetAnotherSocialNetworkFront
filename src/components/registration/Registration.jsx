@@ -11,9 +11,9 @@ import ReactCardFlip from "react-card-flip";
 import {API} from "../../api/API";
 import BackButton from "../../utils/backButton";
 import Profession from "../../utils/Profession";
+import HistoryPaths from "../../utils/HistoryPaths";
 
 const minHeightCard = 185;
-const minWidthCard = 400;
 
 const styles = {
     adminCardAction: {
@@ -101,7 +101,7 @@ class Registration extends React.Component {
         API.postNewUser(JSON.stringify(user))
             .then(() => {
                     user = "username=" + this.state.login + "&password=" + this.state.password;
-                    API.loginIn(user).then(this.props.history.push('/account'));
+                    API.loginIn(user).then(this.props.history.push(HistoryPaths.Account));
                 }
             )
             .catch((err) => {
@@ -227,15 +227,25 @@ class Registration extends React.Component {
             <Grid
                 container
                 direction={"column"}>
-                <TextField required label="Login" onChange={this.handleChangeLogin} id={profession} value={this.state.login}/>
-                <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
+                <TextField required
+                           label="Login"
+                           onChange={this.handleChangeLogin}
+                           id={profession}
+                           value={this.state.login}/>
+                <TextField required
+                           label="Password"
+                           type={"password"}
+                           onChange={this.handleChangePassword}
+                           value={this.state.password}/>
                 <TextField required
                            error={this.state.isTextFieldError}
                            label={"Repeat password"}
                            type={"password"}
                            value={this.state.repeatPassword}
                            onChange={this.handleChangeRepeatPassword}/>
-                <Button disabled={this.state.isButtonDisabled} variant={"outlined"} onClick={this.onRegisterClick}>Register</Button>
+                <Button disabled={this.state.isButtonDisabled}
+                        variant={"outlined"}
+                        onClick={this.onRegisterClick}>Register</Button>
             </Grid>
         );
     }
