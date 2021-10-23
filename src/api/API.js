@@ -36,6 +36,9 @@ export const API = {
     loginIn(user) {
         return login.post('/sign-in', user, {withCredentials: true});
     },
+    logout() {
+        return login.post('/logout', {withCredentials: true});
+    },
     getStudents() {
         return headerInstance.get('/students');
     }

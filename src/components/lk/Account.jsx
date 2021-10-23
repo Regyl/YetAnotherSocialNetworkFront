@@ -17,6 +17,8 @@ import {withRouter} from "react-router-dom";
 import Profession from "../../enums/Profession";
 import TabNumber from "./TabNumber";
 import {AccountCircle} from "@material-ui/icons";
+import {API} from "../../api/API";
+import HistoryPaths from "../../enums/HistoryPaths";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -67,6 +69,7 @@ class Account extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleMenu = this.handleMenu.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     componentDidMount() {
@@ -102,46 +105,46 @@ class Account extends Component {
     handleMenu = (event) => {
         this.setState({anchorEl: event.currentTarget})
     };
+    handleLogout() {
+        API.logout().then(this.props.history.push(HistoryPaths.Home));
+        this.handleClose();
+    }
 
 
     render() {
         return (
             <Grid container>
                 <Grid item style={{width: '100%'}}>
-                    <Box>
-                        <AppBar position="static">
-                            <Toolbar>
-                                <Typography variant="h6" component="div">
-                                    Testing System
-                                </Typography>
-                                <IconButton
-                                    size="large"
-                                    color="inherit"
-                                    onClick={this.handleMenu}
-                                    style={{marginLeft: 'auto'}}
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-                                <Menu
-                                    anchorEl={this.state.anchorEl}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(this.state.anchorEl)}
-                                    onClose={this.handleClose}
-                                >
-                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-                                </Menu>
-                            </Toolbar>
-                        </AppBar>
-                    </Box>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <Typography variant="h6" component="div">
+                                Testing System
+                            </Typography>
+                            <IconButton
+                                size="large"
+                                color="inherit"
+                                onClick={this.handleMenu}
+                                style={{marginLeft: 'auto'}}>
+                                <AccountCircle />
+                            </IconButton>
+                            <Menu
+                                anchorEl={this.state.anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(this.state.anchorEl)}
+                                onClose={this.handleClose}>
+                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                            </Menu>
+                        </Toolbar>
+                    </AppBar>
                 </Grid>
                 <Grid item style={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
