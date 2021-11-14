@@ -1,10 +1,10 @@
 
 const TabNumber = Object.freeze({
-    Zero: 0,
-    First: 1,
-    Second: 2,
-    Third: 3,
-    Four: 4,
+    StudentGroup: 0,
+    SubjectList: 1,
+    StudentResultList: 2,
+    TestPassing: 3,
+    TestCompilation: 4,
     Fifth: 5
 });
 

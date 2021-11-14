@@ -1,24 +1,15 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    Grid,
-    IconButton,
-    Menu, MenuItem,
-    Tab,
-    Tabs,
-    Toolbar,
-    Typography
-} from "@material-ui/core";
+import {Box, Grid, Tab, Tabs, Typography} from "@material-ui/core";
 import PropTypes from "prop-types";
-import React, {Component, useState} from "react";
+import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import Profession from "../../enums/Profession";
 import TabNumber from "./TabNumber";
-import {AccountCircle} from "@material-ui/icons";
-import {API} from "../../api/API";
-import HistoryPaths from "../../enums/HistoryPaths";
+import SubjectCompilation from "./SubjectCompilation";
+import CustomAppBar from "./CustomAppBar";
+import StudentGroupCompilation from "./StudentGroupCompilation";
+import StudentResultList from "./StudentResultList";
+import TestPassing from "./TestPassing";
+import TestCompilation from "./TestCompilation";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -63,13 +54,9 @@ class Account extends Component {
             isTestPassingTabVisible: false,
             isCompilationStudentListVisible: false,
             isCompilationSubjectListVisible: false,
-            isStudentResultListVisible: false,
-            anchorEl: null
+            isStudentResultListVisible: false
         }
         this.handleChange = this.handleChange.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleMenu = this.handleMenu.bind(this);
-        this.handleLogout = this.handleLogout.bind(this);
     }
 
     componentDidMount() {
@@ -93,88 +80,44 @@ class Account extends Component {
         }
     }
 
-
     handleChange = (event, newValue) => {
         this.setState({value: newValue});
     };
-
-    handleClose = () => {
-        this.setState({anchorEl: null})
-    };
-
-    handleMenu = (event) => {
-        this.setState({anchorEl: event.currentTarget})
-    };
-    handleLogout() {
-        API.logout().then(this.props.history.push(HistoryPaths.Home));
-        this.handleClose();
-    }
 
 
     render() {
         return (
             <Grid container>
-                <Grid item style={{width: '100%'}}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <Typography variant="h6" component="div">
-                                Testing System
-                            </Typography>
-                            <IconButton
-                                size="large"
-                                color="inherit"
-                                onClick={this.handleMenu}
-                                style={{marginLeft: 'auto'}}>
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                anchorEl={this.state.anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(this.state.anchorEl)}
-                                onClose={this.handleClose}>
-                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
-                            </Menu>
-                        </Toolbar>
-                    </AppBar>
-                </Grid>
+                <CustomAppBar />
                 <Grid item style={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                         <Tabs value={this.state.value} onChange={this.handleChange}>
-                            {this.state.isCompilationStudentListVisible &&
-                            <Tab label="Составление списка студентов" {...allyProps(TabNumber.Zero)} />}
+                            {this.state.isCompilationStudentListVisible === false ? "" :
+                            <Tab label="Составление списка студентов" value={TabNumber.StudentGroup} {...allyProps(TabNumber.StudentGroup)} />}
                             {this.state.isCompilationSubjectListVisible &&
-                            <Tab label="Составление списка дисциплин" {...allyProps(TabNumber.First)} />}
+                            <Tab label="Составление списка дисциплин" value={TabNumber.SubjectList} {...allyProps(TabNumber.SubjectList)} />}
                             {this.state.isStudentResultListVisible &&
-                            <Tab label="Просмотр результатов" {...allyProps(TabNumber.Second)} />}
+                            <Tab label="Просмотр результатов" value={TabNumber.StudentResultList} {...allyProps(TabNumber.StudentResultList)} />}
                             {this.state.isTestPassingTabVisible &&
-                            <Tab label="Прохождение тестирования" {...allyProps(TabNumber.Third)} />}}
+                            <Tab label="Прохождение тестирования" value={TabNumber.TestPassing} {...allyProps(TabNumber.TestPassing)} />}}
                             {this.state.isCompilationTestsTabVisible &&
-                            <Tab label="Подготовка тестов"{...allyProps(TabNumber.Four)} />}
+                            <Tab label="Подготовка тестов" value={TabNumber.TestCompilation} {...allyProps(TabNumber.TestCompilation)} />}
                         </Tabs>
                     </Box>
-                    <TabPanel value={this.state.value} index={TabNumber.Zero}>
-                        Item One
+                    <TabPanel value={this.state.value} index={TabNumber.StudentGroup}>
+                        <StudentGroupCompilation />
                     </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.First}>
-                        Item Two
+                    <TabPanel value={this.state.value} index={TabNumber.SubjectList}>
+                        <SubjectCompilation />
                     </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.Second}>
-                        Item Three
+                    <TabPanel value={this.state.value} index={TabNumber.StudentResultList}>
+                        <StudentResultList />
                     </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.Third}>
-                        Item Four
+                    <TabPanel value={this.state.value} index={TabNumber.TestPassing}>
+                        <TestPassing />
                     </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.Four}>
-                        Item Fifth
+                    <TabPanel value={this.state.value} index={TabNumber.TestCompilation}>
+                        <TestCompilation />
                     </TabPanel>
                 </Grid>
             </Grid>

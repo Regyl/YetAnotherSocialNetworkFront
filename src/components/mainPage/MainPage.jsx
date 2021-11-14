@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
     Box,
     Button,
@@ -13,10 +13,10 @@ import {
 import FirstImage from '../../img/mainPage/mainBack1.jpg';
 import SecondImage from '../../img/mainPage/mainBack2.jpg';
 import ThirdImage from '../../img/mainPage/mainBack3.jpg';
-import {Link, Router} from "react-router-dom";
+import {Link, Router, withRouter} from "react-router-dom";
 import HistoryPaths from "../../enums/HistoryPaths";
-
-const testingSystemColor = '#55430C';
+import GlobalVariables from "../../enums/GlobalVariables";
+;
 const circleSize = 600;
 
 const styles = {
@@ -67,7 +67,7 @@ const styles = {
         top: '20%',
         left: '38%',
         zIndex: 3,
-        color: testingSystemColor,
+        color: '#55430C',
         fontFamily: 'Cardo',
     },
     thirdTypography: {
@@ -88,7 +88,7 @@ const styles = {
     },
     buttonsStyle: {
         position: 'relative',
-        color: testingSystemColor,
+        color: '#55430C',
         width: '10%',
         height: '10%',
     },
@@ -122,53 +122,52 @@ const styles = {
     },
 };
 
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
+
 const text = "WELCOME TO THE TESTING SYSTEM - OPEN SOURCE PROJECT WITH ONLY ONE GOAL - EDUCATION";
 
 
-class MainPage extends React.Component {
+class MainPage extends Component {
 
 
     render() {
-        const {history} = this.props;
-
         return (
             <Grid container style={{width: '100%', height: '100%'}}>
-                <Router history={history}>
-                    <Grid item style={styles.backGrid}>
-                        <CardMedia image={FirstImage} style={styles.firstCard}/>
-                    </Grid>
-                    <Grid item style={styles.secondBackGrid}>
-                        <CardMedia image={SecondImage} style={styles.secondCard}/>
-                        <Typography variant={"h2"} style={styles.secondTypography}>Testing System</Typography>
-                    </Grid>
-                    <Grid item style={styles.gridButtonGroup}>
-                        <ButtonGroup variant={'text'} style={{width: '100%', height: '100%'}}>
-                            <Button component={Link} to={HistoryPaths.Auth} style={styles.buttonsStyle}>
-                                <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>SIGN IN</Typography>
-                            </Button>
-                            <Button component={Link} to={HistoryPaths.Registration} style={styles.buttonsStyle}>
-                                <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>SIGN UP</Typography>
-                            </Button>
-                        </ButtonGroup>
-                    </Grid>
-                    <Grid item style={styles.thirdBackGrid}>
-                        <CardMedia image={ThirdImage} style={styles.thirdCard}/>
-                        <ThemeProvider theme={theme}>
-                            <Typography variant={"h4"} style={styles.thirdTypography}>
-                                {text}
+                <Grid item style={styles.backGrid}>
+                    <CardMedia image={FirstImage} style={styles.firstCard}/>
+                </Grid>
+                <Grid item style={styles.secondBackGrid}>
+                    <CardMedia image={SecondImage} style={styles.secondCard}/>
+                    <Typography variant={"h2"} style={styles.secondTypography}>
+                        {GlobalVariables.name}
+                    </Typography>
+                </Grid>
+                <Grid item style={styles.gridButtonGroup}>
+                    <ButtonGroup variant={'text'} style={{width: '100%', height: '100%'}}>
+                        <Button component={Link} to={HistoryPaths.Auth} style={styles.buttonsStyle}>
+                            <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>
+                                SIGN IN
                             </Typography>
-                        </ThemeProvider>
-                    </Grid>
-                    <Box component="span"  sx={styles.circle} />
-                    <Box component={"span"} sx={styles.firstBox} />
-                    <Box component={"span"} sx={styles.secondBox} />
-                </Router>
+                        </Button>
+                        <Button component={Link} to={HistoryPaths.Registration} style={styles.buttonsStyle}>
+                            <Typography variant={'h4'} style={{fontFamily: 'Versailles'}}>
+                                SIGN UP
+                            </Typography>
+                        </Button>
+                    </ButtonGroup>
+                </Grid>
+                <Grid item style={styles.thirdBackGrid}>
+                    <CardMedia image={ThirdImage} style={styles.thirdCard}/>
+                    <Typography variant={"h4"} style={styles.thirdTypography}>
+                        {text}
+                    </Typography>
+                </Grid>
+                <Box component="span"  sx={styles.circle} />
+                <Box component={"span"} sx={styles.firstBox} />
+                <Box component={"span"} sx={styles.secondBox} />
             </Grid>
         )
     };
 }
 
 
-export default MainPage;
+export default withRouter(MainPage);

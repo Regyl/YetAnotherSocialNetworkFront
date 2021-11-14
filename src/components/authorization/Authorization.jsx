@@ -15,7 +15,7 @@ const styles = {
 
 }
 
-class Authorisation extends React.Component {
+class Authorization extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,4 +73,4 @@ class Authorisation extends React.Component {
     }
 }
 
-export default Authorisation;
+export default Authorization;
