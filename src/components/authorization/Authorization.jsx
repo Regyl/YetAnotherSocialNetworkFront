@@ -1,7 +1,8 @@
 import React from 'react';
-import {Box, Button, Card, Chip, Grid, TextField} from "@material-ui/core";
+import {Button, Chip, Grid, TextField} from "@material-ui/core";
 import {API} from "../../api/API";
-import {Redirect, useHistory} from "react-router-dom";
+import BackButton from "../backButton";
+import HistoryPaths from "../../enums/HistoryPaths";
 
 const styles = {
     mainForm : {
@@ -14,7 +15,7 @@ const styles = {
 
 }
 
-class Authorisation extends React.Component {
+class Authorization extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,9 +38,9 @@ class Authorisation extends React.Component {
     }
     onLoginClick() {
         let user = 'username='+this.state.login+'&password='+this.state.password;
-        API.loginIn(user).then(
-            this.props.history.push('/account')
-        ).catch((err) => {
+        API.loginIn(user).then((response) => {
+            this.props.history.push({pathname: HistoryPaths.Account, state: {profession: response.data}});
+        }).catch((err) => {
             if(err.response.status === 400)
                 this.handleErrorLogin();
         });
@@ -64,6 +65,7 @@ class Authorisation extends React.Component {
                             <TextField required label="Login" onChange={this.handleChangeLogin} value={this.state.login}/>
                             <TextField required label="Password" type={"password"} onChange={this.handleChangePassword} value={this.state.password}/>
                             <Button variant={"outlined"} onClick={this.onLoginClick} disabled={this.state.isButtonDisabled}>Sign in</Button>
+                            <BackButton />
                         </Grid>
                 </Grid>
             </Grid>
@@ -71,4 +73,4 @@ class Authorisation extends React.Component {
     }
 }
 
-export default Authorisation;
+export default Authorization;

@@ -1,6 +1,5 @@
 import * as axios from "axios";
-
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:8090"; //process.env.TestingSystemUrl
 
 const instance = axios.create({
     baseURL: BASE_URL,
@@ -36,7 +35,10 @@ export const API = {
     loginIn(user) {
         return login.post('/sign-in', user, {withCredentials: true});
     },
-    getStudents() {
-        return headerInstance.get('/students');
-    }
+    logout() {
+        return login.post('/logout', {withCredentials: true});
+    },
+    getAllSubjects() {
+        return instance.get('/subjects/');
+    },
 }
