@@ -1,7 +1,9 @@
+import Authority from "./Authority";
 
 const GlobalVariables = {
-    name: 'Testing System', //Система тестирования
-    basicColor: "#BB8B54"
+    name: 'Yet Another Social Network',
+    basicColor: "#BB8B54",
+    authority: Authority.Administrator
 }
 
 export default GlobalVariables;

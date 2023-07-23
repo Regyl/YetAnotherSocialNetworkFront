@@ -1,14 +1,20 @@
 import * as axios from "axios";
-const BASE_URL = "http://localhost:8090"; //process.env.TestingSystemUrl
+
+const BASE_URL = "http://localhost:8090/social-network";
+const AUTH_URL = "http://localhost:8760/auth";
 
 const instance = axios.create({
     baseURL: BASE_URL,
     method: "GET",
     headers: {
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
     },
 });
 
+/**
+ * @deprecated
+ */
 const headerInstance = axios.create({
     baseURL: BASE_URL,
     method: "POST",
@@ -18,25 +24,27 @@ const headerInstance = axios.create({
     },
 });
 
-const login = axios.create({
-    baseURL: BASE_URL,
-    method: "POST",
+const auth = axios.create({
+    baseURL: AUTH_URL,
     headers: {
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/x-www-form-urlencoded",
+        // "Content-Type": "application/json",
     },
 });
 
 
 export const API = {
     postNewUser(user) {
-        return headerInstance.post("/register", user);
+        return auth.post("/sign-up", user);
     },
-    loginIn(user) {
-        return login.post('/sign-in', user, {withCredentials: true});
+    signIn(user) {
+        return auth.get('/sign-in', {user});
     },
     logout() {
-        return login.post('/logout', {withCredentials: true});
+        return auth.post('/logout', {withCredentials: true});
+    },
+    getRelocationStatistics() {
+        return instance.get('/statistics/count')
     },
     getAllSubjects() {
         return instance.get('/subjects/');

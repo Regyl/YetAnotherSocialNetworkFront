@@ -1,7 +1,7 @@
 import {Component} from "react";
-import SkeletonLoading from "../SkeletonLoading";
+import SkeletonLoading from "../../SkeletonLoading";
 
-class StudentResultList extends Component {
+class TabTwoComponent extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,4 +16,4 @@ class StudentResultList extends Component {
     }
 }
 
-export default StudentResultList;
+export default TabTwoComponent;

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {Redirect, Route, Switch, withRouter} from "react-router-dom";
-import MainPage from "../mainPage/MainPage";
-import Registration from "../registration/Registration";
-import Authorization from "../authorization/Authorization";
-import Account from "../lk/Account";
+import MainPage from "../main/IntroductionPage";
+import Registration from "../auth/Registration";
+import Authorization from "../auth/Authorization";
+import Account from "../main/Home";
 import HistoryPaths from "../../enums/HistoryPaths";
 
 const App = (props) => {
@@ -21,3 +21,5 @@ const App = (props) => {
 }
 
 export default withRouter(App);
+
+//$env:NODE_OPTIONS = "--openssl-legacy-provider"

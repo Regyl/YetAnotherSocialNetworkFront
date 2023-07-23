@@ -7,7 +7,7 @@ import {withRouter} from "react-router-dom";
 import GlobalVariables from "../../enums/GlobalVariables";
 
 
-class CustomAppBar extends Component {
+class HeaderBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -70,4 +70,4 @@ class CustomAppBar extends Component {
 
 }
 
-export default withRouter(CustomAppBar);
+export default withRouter(HeaderBar);

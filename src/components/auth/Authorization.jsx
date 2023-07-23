@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Chip, Grid, TextField} from "@material-ui/core";
-import {API} from "../../api/API";
-import BackButton from "../backButton";
+import BackButton from "../BackButton";
 import HistoryPaths from "../../enums/HistoryPaths";
+import GlobalVariables from "../../enums/GlobalVariables";
 
 const styles = {
     mainForm : {
@@ -30,21 +30,19 @@ class Authorization extends React.Component {
         this.onLoginClick = this.onLoginClick.bind(this);
         this.handleErrorLogin = this.handleErrorLogin.bind(this);
     }
+
     handleChangeLogin(e) {
         this.setState({login: e.target.value});
     }
+
     handleChangePassword(e) {
         this.setState({password: e.target.value, isButtonDisabled: this.login === '' });
     }
+
     onLoginClick() {
-        let user = 'username='+this.state.login+'&password='+this.state.password;
-        API.loginIn(user).then((response) => {
-            this.props.history.push({pathname: HistoryPaths.Account, state: {profession: response.data}});
-        }).catch((err) => {
-            if(err.response.status === 400)
-                this.handleErrorLogin();
-        });
+        this.props.history.push({pathname: HistoryPaths.Account, state: {authority: GlobalVariables.authority}});
     }
+
     handleErrorLogin() {
         this.setState({login: '', password: '', isButtonDisabled: true, chipVisible: true})
     }

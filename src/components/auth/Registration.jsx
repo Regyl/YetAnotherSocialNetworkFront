@@ -5,8 +5,8 @@ import ProfessorImage from '../../img/registration/professor.jpg'
 import StudentImage from '../../img/registration/student.jpg'
 import ReactCardFlip from "react-card-flip";
 import {API} from "../../api/API";
-import BackButton from "../backButton";
-import Profession from "../../enums/Profession";
+import BackButton from "../BackButton";
+import Authority from "../../enums/Authority";
 import HistoryPaths from "../../enums/HistoryPaths";
 
 const minHeightCard = 185;
@@ -94,10 +94,11 @@ class Registration extends React.Component {
             password: this.state.password,
             authority: this.state.userType
         }
+
         API.postNewUser(JSON.stringify(user))
             .then(() => {
                     user = "username=" + this.state.login + "&password=" + this.state.password;
-                    API.loginIn(user).then((resp) => {
+                    API.signIn(user).then((resp) => {
                         this.props.history.push({pathname: HistoryPaths.Account, state: {profession: resp.data}});
                     });
                 }
@@ -140,7 +141,7 @@ class Registration extends React.Component {
                                         </CardActions>
                                     </Card>
                                     <Card>
-                                        {this.getTextFields(Profession.Administrator)}
+                                        {this.getTextFields(Authority.Administrator)}
                                     </Card>
                                 </ReactCardFlip>
                             </Grid>
@@ -169,7 +170,7 @@ class Registration extends React.Component {
                                         </CardActions>
                                     </Card>
                                     <Card>
-                                        {this.getTextFields(Profession.Professor)}
+                                        {this.getTextFields(Authority.Professor)}
                                     </Card>
                                 </ReactCardFlip>
                             </Grid>
@@ -198,7 +199,7 @@ class Registration extends React.Component {
                                         </CardActions>
                                     </Card>
                                     <Card>
-                                        {this.getTextFields(Profession.Student)}
+                                        {this.getTextFields(Authority.Student)}
                                     </Card>
                                 </ReactCardFlip>
                             </Grid>
