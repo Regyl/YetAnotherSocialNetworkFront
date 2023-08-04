@@ -3,6 +3,7 @@ import {Button, Chip, Grid, TextField} from "@material-ui/core";
 import BackButton from "../BackButton";
 import HistoryPaths from "../../enums/HistoryPaths";
 import {API} from "../../api/API";
+import {withRouter} from "react-router-dom";
 
 const styles = {
     mainForm : {
@@ -78,4 +79,4 @@ class Authorization extends React.Component {
     }
 }
 
-export default Authorization;
+export default withRouter(Authorization);

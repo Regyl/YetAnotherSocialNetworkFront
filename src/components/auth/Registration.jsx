@@ -8,6 +8,7 @@ import {API} from "../../api/API";
 import BackButton from "../BackButton";
 import Authority from "../../enums/Authority";
 import HistoryPaths from "../../enums/HistoryPaths";
+import {withRouter} from "react-router-dom";
 
 const minHeightCard = 185;
 
@@ -249,4 +250,4 @@ class Registration extends React.Component {
         );
     }
 }
-export default Registration;
+export default withRouter(Registration);
