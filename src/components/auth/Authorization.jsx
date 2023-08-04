@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Chip, Grid, TextField} from "@material-ui/core";
 import BackButton from "../BackButton";
 import HistoryPaths from "../../enums/HistoryPaths";
-import GlobalVariables from "../../enums/GlobalVariables";
+import {API} from "../../api/API";
 
 const styles = {
     mainForm : {
@@ -40,7 +40,14 @@ class Authorization extends React.Component {
     }
 
     onLoginClick() {
-        this.props.history.push({pathname: HistoryPaths.Account, state: {authority: GlobalVariables.authority}});
+        API.signIn(this.state.login, this.state.password).then((response) => {
+            console.log('response.data: ' + response.data);
+            if (response.data) {
+                this.props.history.push({pathname: HistoryPaths.Account, state: {profession: response.data}});
+            }
+        }).catch((err) => {
+            this.handleErrorLogin();
+        });
     }
 
     handleErrorLogin() {

@@ -3,7 +3,7 @@ import SkeletonLoading from "../../SkeletonLoading";
 import {API} from "../../../api/API";
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import ErrorBox from "../../ErrorBox";
-import {Grid} from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 
 
 class RelocationTab extends Component {
@@ -36,22 +36,35 @@ class RelocationTab extends Component {
         } else if (!this.state.isLoaded) {
             return <SkeletonLoading />;
         }
-
-        console.log('relocatedMales' + this.state.item.relocatedMales);
-
+        
         return (
             <Grid container>
                 <Grid item>
+                    <Box>Соотношение переехавших жителей к оставшимся</Box>
                     {handleBaseRelocationStatistics(getComparisonData(this.state.item), '#8884d8')}
                 </Grid>
                 <Grid item>
-                    {handleBaseRelocationStatistics(getComparisonData(this.state.item), '#82ca9d')}
+                    <Box>Срез по полу</Box>
+                    {handleBaseRelocationStatistics(getGenderComparisonData(this.state.item), '#82ca9d')}
                 </Grid>
             </Grid>
         );
 
     }
 
+}
+
+function getGenderComparisonData(item) {
+    return [
+        {
+            name: 'Мужчины',
+            value: item.relocatedMales
+        },
+        {
+            name: 'Женщины',
+            value: item.relocatedFemales
+        }
+    ]
 }
 
 function getComparisonData(item) {

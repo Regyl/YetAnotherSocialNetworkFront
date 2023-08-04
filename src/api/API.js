@@ -1,7 +1,7 @@
 import * as axios from "axios";
 
-const BASE_URL = "http://localhost:8090/social-network";
-const AUTH_URL = "http://localhost:8760/auth";
+const BASE_URL = "http://45.12.75.54:8090/social-network";
+const AUTH_URL = "http://45.12.75.54:8760/auth/basic";
 
 const instance = axios.create({
     baseURL: BASE_URL,
@@ -37,8 +37,8 @@ export const API = {
     postNewUser(user) {
         return auth.post("/sign-up", user);
     },
-    signIn(user) {
-        return auth.get('/sign-in', {user});
+    signIn(login, password) {
+        return auth.get('/sign-in', {params: {username: login, password: password}});
     },
     logout() {
         return auth.post('/logout', {withCredentials: true});
