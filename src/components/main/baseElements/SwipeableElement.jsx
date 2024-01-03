@@ -16,7 +16,7 @@ function SwipeableTextMobileStepper(props) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const images = props.images;
-    const maxSteps = images.length;
+    const maxSteps = images.links.length;
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
