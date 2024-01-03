@@ -1,11 +1,10 @@
 import * as axios from "axios";
 
-const BASE_URL = "http://localhost:8090/social-network";
+const BASE_URL = "http://localhost:8090/jarvis";
 const AUTH_URL = "http://localhost:8760/auth";
 
 const instance = axios.create({
     baseURL: BASE_URL,
-    method: "GET",
     headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -41,16 +40,9 @@ export const API = {
         return auth.post('/logout', {withCredentials: true});
     },
 
-    /**
-     * @deprecated
-     */
-    getRelocationStatistics() {
-        return instance.get('/statistics/count')
-    },
-    /**
-     * @deprecated
-     */
-    getAllSubjects() {
-        return instance.get('/subjects/');
-    },
+    CORE: {
+        getRecommendations() {
+            return instance.get('/recommendations/list')
+        },
+    }
 }

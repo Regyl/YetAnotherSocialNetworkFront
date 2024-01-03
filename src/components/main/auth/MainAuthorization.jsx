@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Button, Chip, Grid, IconButton, TextField} from "@material-ui/core";
 import HistoryPaths from "../../../enums/HistoryPaths";
 import {API} from "../../../api/API";
@@ -17,7 +17,7 @@ const styles = {
 
 }
 
-class MainAuthorization extends React.Component {
+class MainAuthorization extends Component {
     constructor(props) {
         super(props);
         this.state = {
