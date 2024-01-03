@@ -1,7 +1,7 @@
 import {Component} from "react";
-import SkeletonLoading from "../../SkeletonLoading";
+import SkeletonLoading from "../baseElements/SkeletonLoading";
 
-class TabTwoComponent extends Component {
+class TourChoosingAutomaticTab extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,4 +16,4 @@ class TabTwoComponent extends Component {
     }
 }
 
-export default TabTwoComponent;
+export default TourChoosingAutomaticTab;

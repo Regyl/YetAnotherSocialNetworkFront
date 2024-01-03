@@ -1,8 +1,8 @@
 import {Component} from "react";
-import SkeletonLoading from "../../SkeletonLoading";
+import SkeletonLoading from "../baseElements/SkeletonLoading";
 
 
-class TabThreeComponent extends Component {
+class DefaultLoadingTab extends Component {
     constructor(props) {
         super(props);
     }
@@ -18,4 +18,4 @@ class TabThreeComponent extends Component {
 
 }
 
-export default TabThreeComponent;
+export default DefaultLoadingTab;

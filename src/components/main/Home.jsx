@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import HeaderBar from "./HeaderBar";
-import RelocationTab from "./tabs/RelocationTab";
-import TabOneComponent from "./tabs/TabOneComponent";
-import TabTwoComponent from "./tabs/TabTwoComponent";
-import TabThreeComponent from "./tabs/TabThreeComponent";
-import TabFourComponent from "./tabs/TabFourComponent";
-import TabNumber from "./TabNumber";
+import RecommendationTab from "./tabs/RecommendationTab";
+import TourChoosingTab from "./tabs/TourChoosingTab";
+import TabArray from "../../enums/TabArray";
+import TourChoosingAutomaticTab from "./tabs/TourChoosingAutomaticTab";
 
 class Home extends Component {
     constructor(props) {
@@ -31,27 +29,30 @@ class Home extends Component {
                 <Grid item component={'span'} style={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                         <Tabs value={this.state.value} onChange={this.handleChange}>
-                            <Tab label="Релокация" value={TabNumber.Relocation} {...allyProps(TabNumber.Relocation)} />
-                            <Tab label="Вкладка 1" value={TabNumber.TabOne} {...allyProps(TabNumber.TabOne)} />
-                            <Tab label="Вкладка 2" value={TabNumber.TabTwo} {...allyProps(TabNumber.TabTwo)} />
-                            <Tab label="Вкладка 3" value={TabNumber.TabThree} {...allyProps(TabNumber.TabThree)} />
-                            <Tab label="Вкладка 4" value={TabNumber.TabFour} {...allyProps(TabNumber.TabFour)} />
+                            {
+                                TabArray.map((item, i) => {
+                                    return (<Tab label={item.name} value={item.number} {...allyProps(item.number)} />)
+                                })
+                            }
                         </Tabs>
                     </Box>
-                    <TabPanel value={this.state.value} index={TabNumber.Relocation}>
-                        <RelocationTab />
+                    {/*{
+                        TempHistoryPaths.map((item, i) => {
+                            return (
+                                <TabPanel value={this.state.value} index={item.number}>
+                                    {item.props.children}
+                                </TabPanel>
+                            )
+                        })
+                    }*/}
+                    <TabPanel value={this.state.value} index={0}>
+                        <RecommendationTab />
                     </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.TabOne}>
-                        <TabOneComponent />
+                    <TabPanel value={this.state.value} index={1}>
+                        <TourChoosingTab />
                     </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.TabTwo}>
-                        <TabTwoComponent />
-                    </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.TabThree}>
-                        <TabThreeComponent />
-                    </TabPanel>
-                    <TabPanel value={this.state.value} index={TabNumber.TabFour}>
-                        <TabFourComponent />
+                    <TabPanel value={this.state.value} index={2}>
+                        <TourChoosingAutomaticTab />
                     </TabPanel>
                 </Grid>
             </Grid>

@@ -8,3 +8,5 @@ docker build --tag unfriendly-jarvis-front .
 docker tag unfriendly-jarvis-front regyl/unfriendly-jarvis-front
 docker push regyl/unfriendly-jarvis-front
 ```
+
+$env:NODE_OPTIONS = "--openssl-legacy-provider"

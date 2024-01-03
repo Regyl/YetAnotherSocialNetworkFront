@@ -3,7 +3,7 @@ const HistoryPaths = Object.freeze({
     Home: '/home',
     Registration: '/registration',
     Auth: '/authorization',
-
+    OAuth: '/oauth'
 })
 
 export default HistoryPaths;

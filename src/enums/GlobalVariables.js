@@ -1,9 +1,9 @@
-import Authority from "./Authority";
+import Authorities from "./Authorities";
 
 const GlobalVariables = {
-    name: 'Yet Another Social Network',
+    name: 'Unfriendly Jarvis',
     basicColor: "#BB8B54",
-    authority: Authority.Administrator
+    authority: Authorities.Administrator
 }
 
 export default GlobalVariables;

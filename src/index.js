@@ -4,7 +4,7 @@ import StylesProvider from '@material-ui/styles/StylesProvider'
 import reportWebVitals from './reportWebVitals';
 import {createBrowserHistory} from 'history'
 import {BrowserRouter} from "react-router-dom";
-import App from "./components/app/App";
+import App from "./components/AppRouter";
 
 const history = createBrowserHistory()
 

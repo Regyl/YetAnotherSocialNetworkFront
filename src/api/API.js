@@ -1,7 +1,7 @@
 import * as axios from "axios";
 
-const BASE_URL = "http://45.12.75.54:8090/social-network";
-const AUTH_URL = "http://45.12.75.54:8760/auth/basic";
+const BASE_URL = "http://localhost:8090/social-network";
+const AUTH_URL = "http://localhost:8760/auth";
 
 const instance = axios.create({
     baseURL: BASE_URL,
@@ -12,40 +12,44 @@ const instance = axios.create({
     },
 });
 
-/**
- * @deprecated
- */
-const headerInstance = axios.create({
-    baseURL: BASE_URL,
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-
-    },
-});
-
 const auth = axios.create({
     baseURL: AUTH_URL,
     headers: {
         "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         // "Content-Type": "application/json",
     },
 });
 
 
 export const API = {
-    postNewUser(user) {
-        return auth.post("/sign-up", user);
+    signUp(user) {
+        return auth.post('/basic/sign-up', user);
     },
-    signIn(login, password) {
-        return auth.get('/sign-in', {params: {username: login, password: password}});
+    signInBasic(login, password) {
+        return auth.get('/basic/sign-in', {params: {username: login, password: password}});
     },
+
+    signUpOauth(oAuthData) {
+        return auth.post('/oauth/sign-up', oAuthData);
+    },
+    signInOauth(code, state, oAuthProviderType) {
+        return auth.get('/oauth/sign-in', {params: {code: code, state: state, oAuthProviderType: oAuthProviderType}})
+    },
+
     logout() {
         return auth.post('/logout', {withCredentials: true});
     },
+
+    /**
+     * @deprecated
+     */
     getRelocationStatistics() {
         return instance.get('/statistics/count')
     },
+    /**
+     * @deprecated
+     */
     getAllSubjects() {
         return instance.get('/subjects/');
     },
