@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {AppBar, Grid, IconButton, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Breadcrumbs, Grid, IconButton, Link, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
 import {AccountCircle} from "@material-ui/icons";
 import {API} from "../../api/API";
 import HistoryPaths from "../../enums/HistoryPaths";
@@ -13,9 +13,11 @@ class HeaderBar extends Component {
         this.state = {
             anchorEl: null
         }
+
         this.handleClose = this.handleClose.bind(this);
         this.handleMenu = this.handleMenu.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleAccountClick = this.handleAccountClick.bind(this);
     }
 
     handleClose = () => {
@@ -31,14 +33,29 @@ class HeaderBar extends Component {
         this.handleClose();
     }
 
+    handleAccountClick() {
+        this.props.history.push({pathname: HistoryPaths.Account});
+        this.handleClose();
+    }
+
     render() {
         return(
             <Grid item style={{width: '100%', height: '100%'}}>
                 <AppBar position="static" style={{backgroundColor: GlobalVariables.basicColor}}>
                     <Toolbar>
-                        <Typography variant="h6" component="div">
-                            {GlobalVariables.name}
-                        </Typography>
+                        <Breadcrumbs aria-label="breadcrumb">
+                            <Link underline="hover" color="inherit" href="/">
+                                {GlobalVariables.name}
+                            </Link>
+                            <Link
+                                underline="hover"
+                                color="inherit"
+                                href="/material-ui/getting-started/installation/"
+                            >
+                                Core
+                            </Link>
+                            <Typography color="text.primary">Breadcrumbs</Typography>
+                        </Breadcrumbs>
                         <IconButton
                             size="medium"
                             color="inherit"
@@ -59,7 +76,7 @@ class HeaderBar extends Component {
                             }}
                             open={Boolean(this.state.anchorEl)}
                             onClose={this.handleClose}>
-                            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                            <MenuItem onClick={this.handleAccountClick}>My account</MenuItem>
                             <MenuItem onClick={this.handleLogout}>Sign out</MenuItem>
                         </Menu>
                     </Toolbar>

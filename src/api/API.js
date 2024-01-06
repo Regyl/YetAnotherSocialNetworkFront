@@ -1,10 +1,20 @@
 import * as axios from "axios";
 
-const BASE_URL = "http://localhost:8090/jarvis";
-const AUTH_URL = "http://localhost:8760/auth";
+const hostname = "localhost";
+const BASE_URL = `http://${hostname}:8090/jarvis`;
+const AUTH_URL = `http://${hostname}:8760/auth`;
+const DIC_URL = `http://${hostname}:8070/jarvis`;
 
 const instance = axios.create({
     baseURL: BASE_URL,
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+    },
+});
+
+const dictionaries = axios.create({
+    baseURL: DIC_URL,
     headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -16,7 +26,6 @@ const auth = axios.create({
     headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-        // "Content-Type": "application/json",
     },
 });
 
@@ -44,5 +53,14 @@ export const API = {
         getRecommendations() {
             return instance.get('/recommendations/list')
         },
+        getTourPreview(id) {
+            return instance.get('/tours/', {params: {id: id}})
+        }
+    },
+
+    DICTIONARIES: {
+        getCatalogRecords(catalog) {
+            return dictionaries.get('/list', {params: {catalog: catalog}})
+        }
     }
 }

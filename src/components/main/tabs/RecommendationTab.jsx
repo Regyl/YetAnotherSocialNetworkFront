@@ -52,13 +52,11 @@ class RecommendationTab extends Component {
 
         return (
             <Grid container direction={'column'} justifyContent={'center'}>
-                <Grid container justifyContent={'center'}>
-                    <Masonry columns={10} spacing={2}>
-                        {this.state.items.map((item, index) => (
-                            <SwipeableTextMobileStepper images={item} />
-                        ))}
-                    </Masonry>
-                </Grid>
+                <Masonry columns={4} spacing={2}>
+                    {this.state.items.map((item, index) => (
+                        <SwipeableTextMobileStepper images={item} />
+                    ))}
+                </Masonry>
             </Grid>
         );
     }

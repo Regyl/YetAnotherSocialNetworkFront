@@ -9,6 +9,8 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
+import {withRouter} from "react-router-dom";
+import HistoryPaths from "../../../enums/HistoryPaths";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -30,8 +32,17 @@ function SwipeableTextMobileStepper(props) {
         setActiveStep(step);
     };
 
+    const handleCardClick = () => {
+        props.history.push({
+            pathname: HistoryPaths.TourPreview,
+            state: {id: images.tourId}
+        })
+    }
+
     return (
-        <Box sx={{ minWidth: 400 }}>
+        <Box sx={{
+            //minWidth: 400
+        }} onClick={handleCardClick}>
             <Paper
                 square
                 elevation={0}
@@ -59,7 +70,7 @@ function SwipeableTextMobileStepper(props) {
                                 sx={{
                                     height: 255,
                                     display: 'block',
-                                    maxWidth: 400,
+                                    //maxWidth: 400,
                                     overflow: 'hidden',
                                     width: '100%',
                                 }}
@@ -103,4 +114,4 @@ function SwipeableTextMobileStepper(props) {
     );
 }
 
-export default SwipeableTextMobileStepper;
+export default withRouter(SwipeableTextMobileStepper);
