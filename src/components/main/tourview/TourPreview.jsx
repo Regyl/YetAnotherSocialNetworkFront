@@ -6,13 +6,12 @@ import {Button, Card, Divider, Grid} from "@material-ui/core";
 import SwipeableTextMobileStepper from "../baseElements/SwipeableElement";
 import SkeletonLoading from "../baseElements/SkeletonLoading";
 import Typography from "@mui/material/Typography";
-import DateFnsUtils from '@date-io/date-fns';
-import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import {ToggleButton, ToggleButtonGroup} from "@mui/lab";
 import ImageMasonry from "../baseElements/ImageMasonry";
 import TourPreviewRoute from "./TourPreviewRoute";
 import TourPreviewAdditionalService from "./TourPreviewAdditionalService";
+import DefaultDatePicker from "../baseElements/DefaultDatePicker";
 
 const buttons = [
     <Button key="one">One</Button>,
@@ -77,74 +76,44 @@ class TourPreview extends Component {
                         </Grid>
                     </Card>
                 </Grid>
-                <Grid item xs={2}>
-                    <Grid container direction={'row'} spacing={3}>
-                        <Grid item>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <KeyboardDatePicker
-                                    disableToolbar
-                                    variant="inline"
-                                    format="MM/dd/yyyy"
-                                    margin="normal"
-                                    id="date-picker-inline"
-                                    label="From date"
-                                    value={'2023-01-01'}
-                                    onChange={(val) => console.log(val)}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change date',
-                                    }}
-                                />
-                            </MuiPickersUtilsProvider>
-                        </Grid>
-                        <Grid item>
-                            <Card>
-                                <Grid container justifyContent={'center'}>
-                                    <Typography color="text.secondary" variant="body1">
-                                        People number
-                                    </Typography>
-                                </Grid>
-                                <Divider light />
-                                <Grid container justifyContent={'center'}>
-                                    <ToggleButtonGroup
-                                        //value={alignment}
-                                        exclusive
-                                        //onChange={handleAlignment}
-                                        aria-label="text alignment"
-                                    >
-                                        <ToggleButton value="left" aria-label="left aligned">
-                                            1
-                                        </ToggleButton>
-                                        <ToggleButton value="center" aria-label="centered">
-                                            2
-                                        </ToggleButton>
-                                        <ToggleButton value="right" aria-label="right aligned">
-                                            3
-                                        </ToggleButton>
-                                    </ToggleButtonGroup>
-                                </Grid>
-                            </Card>
-                        </Grid>
+                <Grid container direction={'column'} spacing={3} alignItems={'center'} xs={2}>
+                    <Grid item>
+                        <DefaultDatePicker name={'Date from'} onChange={(val) => console.log(val)} value={'2023-01-01'} />
+                    </Grid>
+                    <Grid item>
+                        <Card style={{maxWidth: 150}}>
+                            <Grid container justifyContent={'center'}>
+                                <Typography color="text.secondary" variant="body1">
+                                    People number
+                                </Typography>
+                            </Grid>
+                            <Divider light />
+                            <Grid container justifyContent={'center'}>
+                                <ToggleButtonGroup
+                                    //value={alignment}
+                                    exclusive
+                                    //onChange={handleAlignment}
+                                    aria-label="text alignment"
+                                >
+                                    <ToggleButton value="left" aria-label="left aligned">
+                                        1
+                                    </ToggleButton>
+                                    <ToggleButton value="center" aria-label="centered">
+                                        2
+                                    </ToggleButton>
+                                    <ToggleButton value="right" aria-label="right aligned">
+                                        3
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </Grid>
+                        </Card>
                     </Grid>
                 </Grid>
                 <Grid container xs={5} justifyContent={'center'}>
                     <FlightTakeoffIcon />
                 </Grid>
                 <Grid item xs={2}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="To date"
-                            value={'2023-01-01'}
-                            onChange={(val) => console.log(val)}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                        />
-                    </MuiPickersUtilsProvider>
+                    <DefaultDatePicker name={'Date to'} onChange={(val) => console.log(val)} value={'2023-01-01'}/>
                 </Grid>
 
                 <Grid item xs={12}>

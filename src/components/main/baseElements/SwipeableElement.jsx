@@ -41,7 +41,7 @@ function SwipeableTextMobileStepper(props) {
 
     return (
         <Box sx={{
-            //minWidth: 400
+            //maxWidth: 400
         }} onClick={handleCardClick}>
             <Paper
                 square
